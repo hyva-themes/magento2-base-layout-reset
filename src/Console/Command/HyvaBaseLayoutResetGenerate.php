@@ -64,7 +64,7 @@ class HyvaBaseLayoutResetGenerate extends Command
         foreach ([$this->basePageLayoutFilesCollector, $this->baseLayoutFilesCollector] as $layoutFileCollector) {
             $this->generateLayoutResetsForCollector($layoutFileCollector);
         }
-        return 0;
+        return Command::SUCCESS;
     }
 
     private function generateLayoutResetsForCollector(ViewFileCollector $layoutFileCollector): void

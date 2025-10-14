@@ -12,6 +12,8 @@
         <arguments>
             <argument name="commands" xsi:type="array">
                 <item name="HyvaBaseLayoutResetsGenerate" xsi:type="object">Hyva\BaseLayoutReset\Console\Command\HyvaBaseLayoutResetGenerate</item>
+                <item name="HyvaBaseLayoutResetInfo" xsi:type="object">Hyva\BaseLayoutReset\Console\Command\HyvaBaseLayoutResetInfo</item>
+                <item name="HyvaBaseLayoutResetMigrateTheme" xsi:type="object">Hyva\BaseLayoutReset\Console\Command\HyvaBaseLayoutResetMigrateTheme</item>
             </argument>
         </arguments>
     </type>

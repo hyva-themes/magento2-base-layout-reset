@@ -34,12 +34,12 @@ class HyvaThemes
 
     public function isHyvaTheme(ThemeInterface $theme): bool
     {
-        $id = (int) $theme->getId();
-        if (!isset($this->memoizedThemes[$id])) {
+        $key = $theme->getFullPath();
+        if (!isset($this->memoizedThemes[$key])) {
             $inheritanceHierarchy = $this->getThemeHierarchy($theme);
-            $this->memoizedThemes[$id] = count(array_intersect($inheritanceHierarchy, $this->hyvaBaseThemes)) > 0;
+            $this->memoizedThemes[$key] = count(array_intersect($inheritanceHierarchy, $this->hyvaBaseThemes)) > 0;
         }
-        return $this->memoizedThemes[$id];
+        return $this->memoizedThemes[$key];
     }
 
     private function getThemeHierarchy(ThemeInterface $theme): array
@@ -47,5 +47,10 @@ class HyvaThemes
         return map(function (ThemeInterface $theme) {
             return $theme->getCode();
         }, $theme->getInheritedThemes());
+    }
+
+    public function getHyvaBaseThemes(): array
+    {
+        return $this->hyvaBaseThemes;
     }
 }
