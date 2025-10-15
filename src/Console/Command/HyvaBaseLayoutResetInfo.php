@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Hyva\BaseLayoutReset\Console\Command;
 
 use Hyva\BaseLayoutReset\Model\HyvaThemeResetInfo;
+use Hyva\BaseLayoutReset\Service\HyvaThemes;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table as CliTable;
 use Symfony\Component\Console\Helper\TableSeparator;
@@ -21,11 +22,15 @@ class HyvaBaseLayoutResetInfo extends Command
 {
     private HyvaThemeResetInfo $hyvaThemeResetInfo;
 
+    private HyvaThemes $hyvaThemes;
+
     public function __construct(
-        HyvaThemeResetInfo $hyvaThemeResetInfo
+        HyvaThemeResetInfo $hyvaThemeResetInfo,
+        HyvaThemes $hyvaThemes
     ) {
         parent::__construct();
         $this->hyvaThemeResetInfo = $hyvaThemeResetInfo;
+        $this->hyvaThemes = $hyvaThemes;
     }
 
     protected function configure()
@@ -52,7 +57,7 @@ class HyvaBaseLayoutResetInfo extends Command
             if ($this->isBaseHyvaTheme($theme)) {
                 $steps = $this->getRequiredMigrationSteps($theme);
                 if (!$steps) {
-                    $steps = 'None - Already using the generated base layout';
+                    $steps = 'Already using the generated base layout';
                 }
             } else {
                 $steps = 'Not a Hyvä base theme';
@@ -76,7 +81,7 @@ class HyvaBaseLayoutResetInfo extends Command
             (null === $theme['parent-in-db'] && null === $theme['parent-in-xml']);
     }
 
-    private function getRequiredMigrationSteps($theme): string
+    private function getRequiredMigrationSteps(array $theme): string
     {
         $steps = [];
 
@@ -85,7 +90,10 @@ class HyvaBaseLayoutResetInfo extends Command
         }
         if ($theme['parent-in-xml'] === 'Hyva/reset') {
             $steps[] = '- Remove <info><parent></info> node from themes.xml';
-            $steps[] = "- Add <info>{$theme['code']}</info> as Hyva\BaseLayoutReset\Service\HyvaThemes argument in di.xml";
+        }
+
+        if (! in_array($theme['code'], $this->hyvaThemes->getHyvaBaseThemes(), true)) {
+            $steps[] = "- Add <info>{$theme['code']}</info> as Hyva\BaseLayoutReset\Service\HyvaThemes constructor arg in di.xml";
         }
 
         if (! $theme['root-template']) {
