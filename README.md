@@ -91,6 +91,8 @@ Replace `Vendor/theme` with your theme code.
 `Hyva\BaseLayoutReset\Service\HyvaThemes`.
 If you prefer not to modify `app/etc/di.xml`, you can move this declaration into a `di.xml` file inside your custom module.
 
+*Be aware that many projects do not keep `app/etc/di.xml` in version control, and any changes may be lost. We recommend adding the declaration to a custom module `di.xml` instead.*
+
 
 ## License
 Hyvä Themes - https://hyva.io

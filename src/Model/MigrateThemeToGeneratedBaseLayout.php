@@ -193,7 +193,7 @@ EOXML
 
         $xml->saveXML($globalDiXmlFilePath);
 
-        $this->performedActions[] = sprintf('Added %s as Hyva\BaseLayoutReset\Service\HyvaThemes $hyvaBaseThemes constructor argument in /app/etc/di.xml', $code);
+        $this->performedActions[] = sprintf('Added %s as Hyva\BaseLayoutReset\Service\HyvaThemes $hyvaBaseThemes constructor argument in app/etc/di.xml', $code);
     }
 
     public function getPerformedActions(): array
