@@ -18,6 +18,8 @@ bin/magento module:enable Hyva_BaseLayoutReset
 bin/magento setup:upgrade
 ```
 
+If your custom theme inherits from `Hyva/default` or `Hyva/default-csp`, no additional steps are required.
+
 ## Usage
 
 In Hyvä default-theme versions up to 1.3.17, a parent theme was used to override and remove block layout declarations from module folders.
@@ -29,16 +31,12 @@ This approach improves:
 * Performance, on page requests with a cold layout cache.
 * Maintainability, by removing the need for a reset theme.
 
-If your custom theme inherits from `Hyva/default` or `Hyva/default-csp`, no additional steps are required.
+The base layout resets are generated on the fly.  
+It is also possible to trigger generation by running the command 
 
-## What determines if a theme is a Hyvä Theme
-
-A theme is considered a Hyvä-based theme if its inheritance chain contains a theme with a name starting with `Hyva/`.  
-This was always true when using the `Hyva/reset` theme. However, when using the generated base layouts instead, this detection no longer works.
-
-To ensure proper detection, base Hyvä themes must be added to the constructor argument `$hyvaBaseThemes` of `Hyva\BaseLayoutReset\Service\HyvaThemes` via `di.xml`.
-
-In most projects, this is best done within a custom module, but it can also be defined in `app/etc/di.xml`.
+```sh
+bin/magento hyva:base-layout-resets:generate
+```
 
 ## Configuring the generation folder
 
@@ -50,6 +48,15 @@ return [
     'hyva_layout_resets_generation_directory' => '/var/www/html/generated/code/hyva-layout-resets/',
     ...
 ```
+
+## What determines if a theme is a Hyvä Theme
+
+A theme is considered a Hyvä-based theme if its inheritance chain contains a theme with a name starting with `Hyva/`.  
+This was always true when using the `Hyva/reset` theme. However, when using the generated base layouts instead, this detection no longer works.
+
+To ensure proper detection, base Hyvä themes must be added to the constructor argument `$hyvaBaseThemes` of `Hyva\BaseLayoutReset\Service\HyvaThemes` via `di.xml`.
+
+In most projects, this is best done within a custom module, but it can also be defined in `app/etc/di.xml`.
 
 ## Custom Hyvä base themes
 
