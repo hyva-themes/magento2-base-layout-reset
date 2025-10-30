@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Hyva\BaseLayoutReset\Model;
 
 use Hyva\BaseLayoutReset\Model\Layout\MutateXml;
-use Hyva\BaseLayoutReset\Service\HyvaThemes;
+use Hyva\Theme\Service\HyvaThemes;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Filesystem\Directory\WriteFactory as DirectoryWriteFactory;
 use Magento\Framework\Filesystem\DriverPool as FilesystemDriverPool;
@@ -20,20 +20,44 @@ use Magento\Framework\Module\Dir as ModuleDir;
 
 class MigrateThemeToGeneratedBaseLayout
 {
-    private HyvaThemeResetInfo $hyvaThemeResetInfo;
+    /**
+     * @var HyvaThemeResetInfo
+     */
+    private $hyvaThemeResetInfo;
 
-    private ResourceConnection $resourceConnection;
+    /**
+     * @var ResourceConnection
+     */
+    private $resourceConnection;
 
-    private FileReadFactory $fileReadFactory;
+    /**
+     * @var FileReadFactory
+     */
+    private $fileReadFactory;
 
-    private MutateXml $mutateXml;
+    /**
+     * @var MutateXml
+     */
+    private $mutateXml;
 
-    private DirectoryWriteFactory $directoryWriteFactory;
+    /**
+     * @var DirectoryWriteFactory
+     */
+    private $directoryWriteFactory;
 
-    private ModuleDir $moduleDir;
+    /**
+     * @var ModuleDir
+     */
+    private $moduleDir;
 
-    private HyvaThemes $hyvaThemes;
+    /**
+     * @var HyvaThemes
+     */
+    private $hyvaThemes;
 
+    /**
+     * @var string[]
+     */
     private $performedActions = [];
 
     public function __construct(
@@ -154,7 +178,7 @@ EOXML
     private function addHyvaBaseThemeDiConfig(string $code): void
     {
         $globalDiXmlFilePath = BP . '/app/etc/di.xml';
-        $hyvaBaseThemesXpath = '/config/type[@name="Hyva\BaseLayoutReset\Service\HyvaThemes"]/arguments/argument[@name="hyvaBaseThemes"]';
+        $hyvaBaseThemesXpath = '/config/type[@name="Hyva\Theme\Service\HyvaThemes"]/arguments/argument[@name="hyvaBaseThemes"]';
 
         $xml = $this->loadXml($globalDiXmlFilePath, 'di.xml');
 
@@ -164,24 +188,24 @@ EOXML
             }
         }
 
-        if (!($xml->xpath('/config/type[@name="Hyva\BaseLayoutReset\Service\HyvaThemes"]'))) {
+        if (!($xml->xpath('/config/type[@name="Hyva\Theme\Service\HyvaThemes"]'))) {
             $this->mutateXml->addChild(
                 $xml,
                 '/config',
-                '<type name="Hyva\BaseLayoutReset\Service\HyvaThemes"></type>'
+                '<type name="Hyva\Theme\Service\HyvaThemes"></type>'
             );
         }
-        if (!($xml->xpath('/config/type[@name="Hyva\BaseLayoutReset\Service\HyvaThemes"]/arguments'))) {
+        if (!($xml->xpath('/config/type[@name="Hyva\Theme\Service\HyvaThemes"]/arguments'))) {
             $this->mutateXml->addChild(
                 $xml,
-                '/config/type[@name="Hyva\BaseLayoutReset\Service\HyvaThemes"]',
+                '/config/type[@name="Hyva\Theme\Service\HyvaThemes"]',
                 '<arguments></arguments>'
             );
         }
         if (!($xml->xpath($hyvaBaseThemesXpath))) {
             $this->mutateXml->addChild(
                 $xml,
-                '/config/type[@name="Hyva\BaseLayoutReset\Service\HyvaThemes"]/arguments',
+                '/config/type[@name="Hyva\Theme\Service\HyvaThemes"]/arguments',
                 '<argument name="hyvaBaseThemes" xsi:type="array"/>'
             );
         }
@@ -193,7 +217,7 @@ EOXML
 
         $xml->saveXML($globalDiXmlFilePath);
 
-        $this->performedActions[] = sprintf('Added %s as Hyva\BaseLayoutReset\Service\HyvaThemes $hyvaBaseThemes constructor argument in app/etc/di.xml', $code);
+        $this->performedActions[] = sprintf('Added %s as Hyva\Theme\Service\HyvaThemes $hyvaBaseThemes constructor argument in app/etc/di.xml', $code);
     }
 
     public function getPerformedActions(): array

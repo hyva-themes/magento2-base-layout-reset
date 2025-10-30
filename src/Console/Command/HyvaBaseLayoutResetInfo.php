@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Hyva\BaseLayoutReset\Console\Command;
 
 use Hyva\BaseLayoutReset\Model\HyvaThemeResetInfo;
-use Hyva\BaseLayoutReset\Service\HyvaThemes;
+use Hyva\Theme\Service\HyvaThemes;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table as CliTable;
 use Symfony\Component\Console\Helper\TableSeparator;
@@ -20,9 +20,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class HyvaBaseLayoutResetInfo extends Command
 {
-    private HyvaThemeResetInfo $hyvaThemeResetInfo;
+    /**
+     * @var HyvaThemeResetInfo
+     */
+    private $hyvaThemeResetInfo;
 
-    private HyvaThemes $hyvaThemes;
+    /**
+     * @var HyvaThemes
+     */
+    private $hyvaThemes;
 
     public function __construct(
         HyvaThemeResetInfo $hyvaThemeResetInfo,
@@ -93,7 +99,7 @@ class HyvaBaseLayoutResetInfo extends Command
         }
 
         if (! in_array($theme['code'], $this->hyvaThemes->getHyvaBaseThemes(), true)) {
-            $steps[] = "- Add <info>{$theme['code']}</info> as Hyva\BaseLayoutReset\Service\HyvaThemes constructor arg in di.xml";
+            $steps[] = "- Add <info>{$theme['code']}</info> as Hyva\Theme\Service\HyvaThemes constructor arg in di.xml";
         }
 
         if (! $theme['root-template']) {

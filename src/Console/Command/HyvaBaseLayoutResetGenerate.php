@@ -30,13 +30,25 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class HyvaBaseLayoutResetGenerate extends Command
 {
-    private ViewFileCollector $baseLayoutFilesCollector;
+    /**
+     * @var ViewFileCollector
+     */
+    private $baseLayoutFilesCollector;
 
-    private ViewFileCollector $basePageLayoutFilesCollector;
+    /**
+     * @var ViewFileCollector
+     */
+    private $basePageLayoutFilesCollector;
 
-    private Theme\DataFactory $themeFactory;
+    /**
+     * @var Theme\DataFactory
+     */
+    private $themeFactory;
 
-    private LayoutFileReset $layoutFileReset;
+    /**
+     * @var LayoutFileReset
+     */
+    private $layoutFileReset;
 
     public function __construct(
         ViewFileCollector $baseLayoutFilesCollector,

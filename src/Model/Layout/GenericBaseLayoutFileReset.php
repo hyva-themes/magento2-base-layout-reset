@@ -12,7 +12,10 @@ namespace Hyva\BaseLayoutReset\Model\Layout;
 
 class GenericBaseLayoutFileReset
 {
-    private MutateXml $mutateXml;
+    /**
+     * @var MutateXml
+     */
+    private $mutateXml;
 
     public function __construct(MutateXml $mutateXml)
     {

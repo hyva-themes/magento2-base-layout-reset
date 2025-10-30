@@ -15,9 +15,15 @@ use Hyva\BaseLayoutReset\Model\Layout\MutateXml;
 
 class SwaggerIndexBaseLayoutReset implements SpecialCaseBaseLayoutResetInterface
 {
-    private GenericBaseLayoutFileReset $genericBaseLayoutFileReset;
+    /**
+     * @var GenericBaseLayoutFileReset
+     */
+    private $genericBaseLayoutFileReset;
 
-    private MutateXml $mutateXml;
+    /**
+     * @var MutateXml
+     */
+    private $mutateXml;
 
     public function __construct(
         GenericBaseLayoutFileReset $genericBaseLayoutFileReset,

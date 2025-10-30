@@ -42,23 +42,50 @@ class LayoutFileReset
      */
     public const CONFIG_PATH_HYVA_RESETS_DIR = 'hyva_layout_resets_generation_directory';
 
-    private LayoutResetFileWrapperFactory $layoutResetFileWrapperFactory;
+    /**
+     * @var LayoutResetFileWrapperFactory
+     */
+    private $layoutResetFileWrapperFactory;
 
-    private AppDirectoryList $appDirectoryList;
+    /**
+     * @var AppDirectoryList
+     */
+    private $appDirectoryList;
 
-    private ComponentRegistrar $componentRegistrar;
+    /**
+     * @var ComponentRegistrar
+     */
+    private $componentRegistrar;
 
-    private FileReadFactory $fileReadFactory;
+    /**
+     * @var FileReadFactory
+     */
+    private $fileReadFactory;
 
-    private LoggerInterface $logger;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
 
-    private DirectoryWriteFactory $directoryWriteFactory;
+    /**
+     * @var DirectoryWriteFactory
+     */
+    private $directoryWriteFactory;
 
-    private DeploymentConfig $deploymentConfig;
+    /**
+     * @var DeploymentConfig
+     */
+    private $deploymentConfig;
 
-    private GenericBaseLayoutFileReset $genericBaseLayoutFileReset;
+    /**
+     * @var GenericBaseLayoutFileReset
+     */
+    private $genericBaseLayoutFileReset;
 
-    private SpecialCaseLayoutResetPool $specialCaseLayoutResetPool;
+    /**
+     * @var SpecialCaseLayoutResetPool
+     */
+    private $specialCaseLayoutResetPool;
 
     /**
      * @var array[]
@@ -68,11 +95,17 @@ class LayoutFileReset
     /**
      * @var bool[]
      */
-    private array $modulesToReset;
+    private $modulesToReset;
 
-    private bool $isDeveloperMode = false;
+    /**
+     * @var bool
+     */
+    private $isDeveloperMode = false;
 
-    private bool $isRegenerateMode = false;
+    /**
+     * @var bool
+     */
+    private $isRegenerateMode = false;
 
     public function __construct(
         LayoutResetFileWrapperFactory $layoutResetFileWrapperFactory,

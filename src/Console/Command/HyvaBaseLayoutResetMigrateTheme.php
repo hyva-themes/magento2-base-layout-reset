@@ -18,7 +18,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class HyvaBaseLayoutResetMigrateTheme extends Command
 {
-    private MigrateThemeToGeneratedBaseLayout $migrateThemeToGeneratedBaseLayout;
+    /**
+     * @var MigrateThemeToGeneratedBaseLayout
+     */
+    private $migrateThemeToGeneratedBaseLayout;
 
     public function __construct(
         MigrateThemeToGeneratedBaseLayout $migrateThemeToGeneratedBaseLayout
