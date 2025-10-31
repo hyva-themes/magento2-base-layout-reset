@@ -112,7 +112,7 @@ class HyvaBaseLayoutResetInfo extends Command
 
         if ($steps && in_array($theme['code'], ['Hyva/default', 'Hyva/default-csp'], true)) {
             array_unshift($steps, "You can patch generated layout support with these actions:\n");
-            array_unshift($steps, "Upgrade <info>{$theme['code']}</info> to version 1.3.18 or newer.");
+            array_unshift($steps, "Upgrade <info>{$theme['code']}</info> to version 1.4.0 or newer.");
 
             $steps[] = "\nRun the following command to apply the above changes:";
             $steps[] = "\n<info>bin/magento hyva:base-layout-resets:migrate {$theme['code']}</info>";
