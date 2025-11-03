@@ -15,9 +15,15 @@ use Hyva\BaseLayoutReset\Model\Layout\MutateXml;
 
 class InventoryInStorePickupCheckoutSuccessBaseLayoutReset implements SpecialCaseBaseLayoutResetInterface
 {
-    private GenericBaseLayoutFileReset $genericBaseLayoutFileReset;
+    /**
+     * @var GenericBaseLayoutFileReset
+     */
+    private $genericBaseLayoutFileReset;
 
-    private MutateXml $mutateXml;
+    /**
+     * @var MutateXml
+     */
+    private $mutateXml;
 
     public function __construct(
         GenericBaseLayoutFileReset $genericBaseLayoutFileReset,

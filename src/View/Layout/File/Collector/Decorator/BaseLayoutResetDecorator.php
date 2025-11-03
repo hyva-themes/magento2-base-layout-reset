@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace Hyva\BaseLayoutReset\View\Layout\File\Collector\Decorator;
 
 use Hyva\BaseLayoutReset\Model\Layout\LayoutFileReset;
-use Hyva\BaseLayoutReset\Service\HyvaThemes;
+use Hyva\Theme\Service\HyvaThemes;
 use Magento\Framework\App\Area as AppArea;
 use Magento\Framework\App\AreaList as AppAreaList;
 use Magento\Framework\App\State as AppState;
@@ -26,17 +26,35 @@ use Magento\Framework\View\File\CollectorInterface;
  */
 class BaseLayoutResetDecorator implements CollectorInterface
 {
-    private CollectorInterface $subject;
+    /**
+     * @var CollectorInterface
+     */
+    private $subject;
 
-    private LayoutFileReset $layoutFileReset;
+    /**
+     * @var LayoutFileReset
+     */
+    private $layoutFileReset;
 
-    private AppAreaList $appAreaList;
+    /**
+     * @var AppAreaList
+     */
+    private $appAreaList;
 
-    private HttpRequest $httpRequest;
+    /**
+     * @var HttpRequest
+     */
+    private $httpRequest;
 
-    private AppState $appState;
+    /**
+     * @var AppState
+     */
+    private $appState;
 
-    private HyvaThemes $hyvaThemes;
+    /**
+     * @var HyvaThemes
+     */
+    private $hyvaThemes;
 
     public function __construct(
         CollectorInterface $subject,

@@ -118,15 +118,4 @@
             <argument name="basePageLayoutFilesCollector" xsi:type="object">pageLayoutFileSourceBase</argument>
         </arguments>
     </type>
-
-    <type name="Hyva\BaseLayoutReset\Service\HyvaThemes">
-        <arguments>
-            <argument name="hyvaBaseThemes" xsi:type="array">
-                <!-- Keep Hyva/reset in this list to support older installations that use it. -->
-                <item name="Hyva/reset" xsi:type="string">Hyva/reset</item>
-                <item name="Hyva/default" xsi:type="string">Hyva/default</item>
-                <item name="Hyva/default-csp" xsi:type="string">Hyva/default-csp</item>
-            </argument>
-        </arguments>
-    </type>
 </config>

@@ -22,9 +22,9 @@ If your custom theme inherits from `Hyva/default` or `Hyva/default-csp`, no addi
 
 ## Usage
 
-In Hyvä default-theme versions up to 1.3.17, a parent theme was used to override and remove block layout declarations from module folders.
+In Hyvä default-theme versions up to 1.3.18, a parent theme was used to override and remove block layout declarations from module folders.
 
-Starting with version 1.3.18, Hyvä Themes use this module instead, which dynamically generates base layout declarations in `var/hyva-layout-resets/`.
+Starting with version 1.4.0, Hyvä Themes use this module instead, which dynamically generates base layout declarations in `var/hyva-layout-resets/`.
 
 This approach improves:
 

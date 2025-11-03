@@ -18,7 +18,7 @@ class SpecialCaseLayoutResetPool implements IteratorAggregate
     /**
      * @var SpecialCaseBaseLayoutResetInterface[]
      */
-    private array $specialCases;
+    private $specialCases;
 
     public function __construct(array $specialCases)
     {

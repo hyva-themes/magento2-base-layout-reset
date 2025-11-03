@@ -10,26 +10,38 @@ declare(strict_types=1);
 
 namespace Hyva\BaseLayoutReset\Model;
 
-use function array_filter as filter;
-use function array_map as map;
-use function array_values as values;
-use Hyva\BaseLayoutReset\Service\HyvaThemes;
+use Hyva\Theme\Service\HyvaThemes;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Component\ComponentRegistrarInterface;
 use Magento\Framework\Filesystem\DriverPool as FilesystemDriverPool;
 use Magento\Framework\Filesystem\File\ReadFactory as FileReadFactory;
 use Magento\Framework\View\Design\Theme\ThemeList;
 use Magento\Framework\View\Design\ThemeInterface;
+use function array_filter as filter;
+use function array_map as map;
+use function array_values as values;
 
 class HyvaThemeResetInfo
 {
-    private ThemeList $themeList;
+    /**
+     * @var ThemeList
+     */
+    private $themeList;
 
-    private HyvaThemes $hyvaThemes;
+    /**
+     * @var HyvaThemes
+     */
+    private $hyvaThemes;
 
-    private ComponentRegistrarInterface $componentRegistrar;
+    /**
+     * @var ComponentRegistrarInterface
+     */
+    private $componentRegistrar;
 
-    private FileReadFactory $fileReadFactory;
+    /**
+     * @var FileReadFactory
+     */
+    private $fileReadFactory;
 
     public function __construct(
         FileReadFactory $fileReadFactory,
