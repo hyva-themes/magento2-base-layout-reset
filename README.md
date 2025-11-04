@@ -102,10 +102,10 @@ If you prefer not to modify `app/etc/di.xml`, you can move this declaration into
 
 
 ## License
-Hyvä Themes - https://hyva.io
 
-Copyright © Hyvä Themes B.V 2025-present. All rights reserved.
+This package is licensed under the **Open Software License (OSL 3.0)**.
 
-This product is licensed per Magento install. Please see [License File](LICENSE.md) for more information.
+* **Copyright:** Copyright © 2020-present Hyvä Themes. All rights reserved.
+* **License Text:** The full text of the OSL 3.0 license can be found in the `LICENSE.txt` file within this package, and is also available online at [http://opensource.org/licenses/osl-3.0.php](http://opensource.org/licenses/osl-3.0.php).
 
 [ico-compatibility]: https://img.shields.io/badge/magento-%202.4-brightgreen.svg?logo=magento&longCache=true&style=flat-square
