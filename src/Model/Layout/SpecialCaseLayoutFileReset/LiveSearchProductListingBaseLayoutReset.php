@@ -15,7 +15,6 @@ use Hyva\BaseLayoutReset\Model\Layout\MutateXml;
 
 class LiveSearchProductListingBaseLayoutReset implements SpecialCaseBaseLayoutResetInterface
 {
-
     /**
      * @var GenericBaseLayoutFileReset
      */

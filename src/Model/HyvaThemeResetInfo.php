@@ -10,15 +10,20 @@ declare(strict_types=1);
 namespace Hyva\BaseLayoutReset\Model;
 
 use Hyva\Theme\Service\HyvaThemes;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Component\ComponentRegistrarInterface;
+use Magento\Framework\Filesystem\Driver\File as Filesystem;
 use Magento\Framework\Filesystem\DriverPool as FilesystemDriverPool;
 use Magento\Framework\Filesystem\File\ReadFactory as FileReadFactory;
+use Magento\Framework\Filesystem\Glob;
 use Magento\Framework\View\Design\Theme\ThemeList;
 use Magento\Framework\View\Design\ThemeInterface;
 use function array_filter as filter;
 use function array_map as map;
 use function array_values as values;
+
+// phpcs:disable Magento2.Functions.DiscouragedFunction.Discouraged
 
 class HyvaThemeResetInfo
 {
@@ -42,16 +47,23 @@ class HyvaThemeResetInfo
      */
     private $fileReadFactory;
 
+    /**
+     * @var Filesystem|null
+     */
+    private $filesystem;
+
     public function __construct(
         FileReadFactory $fileReadFactory,
         ThemeList $themeList,
         HyvaThemes $hyvaThemes,
-        ComponentRegistrarInterface $componentRegistrar
+        ComponentRegistrarInterface $componentRegistrar,
+        ?Filesystem $filesystem = null,
     ) {
         $this->fileReadFactory = $fileReadFactory;
         $this->themeList = $themeList;
         $this->hyvaThemes = $hyvaThemes;
         $this->componentRegistrar = $componentRegistrar;
+        $this->filesystem = $filesystem ?? ObjectManager::getInstance()->get(Filesystem::class);
     }
 
     public function getHyvaThemesInfo(?string $themeCode = null): array
@@ -100,7 +112,7 @@ class HyvaThemeResetInfo
     private function loadThemeXml(string $themeXmlFile): \SimpleXMLElement
     {
         if (!file_exists($themeXmlFile)) {
-            throw new \RuntimeException(sprintf('No theme.xml file found in "%s".', dirname($themeXmlFile)));
+            throw new \RuntimeException(sprintf('No theme.xml file found in "%s".', $this->filesystem->getParentDirectory($themeXmlFile)));
         }
         return $this->loadXml($themeXmlFile, 'theme.xml');
     }
@@ -117,7 +129,7 @@ class HyvaThemeResetInfo
 
     private function hasDefaultHyvaLayoutUpdateDirective(string $themePath): bool
     {
-        $defaultLayoutFiles = glob($themePath . '/*/layout/default.xml');
+        $defaultLayoutFiles = Glob::glob($themePath . '/*/layout/default.xml');
         foreach ($defaultLayoutFiles as $defaultLayoutFile) {
             $xml = $this->loadXml($defaultLayoutFile, 'Layout XML');
             $nodes = $xml->xpath('//update');
