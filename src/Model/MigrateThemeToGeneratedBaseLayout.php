@@ -11,11 +11,15 @@ namespace Hyva\BaseLayoutReset\Model;
 
 use Hyva\BaseLayoutReset\Model\Layout\MutateXml;
 use Hyva\Theme\Service\HyvaThemes;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Filesystem\Directory\WriteFactory as DirectoryWriteFactory;
+use Magento\Framework\Filesystem\Driver\File as Filesystem;
 use Magento\Framework\Filesystem\DriverPool as FilesystemDriverPool;
 use Magento\Framework\Filesystem\File\ReadFactory as FileReadFactory;
 use Magento\Framework\Module\Dir as ModuleDir;
+
+// phpcs:disable Magento2.Functions.DiscouragedFunction.Discouraged
 
 class MigrateThemeToGeneratedBaseLayout
 {
@@ -59,6 +63,11 @@ class MigrateThemeToGeneratedBaseLayout
      */
     private $performedActions = [];
 
+    /**
+     * @var Filesystem
+     */
+    private $filesystem;
+
     public function __construct(
         HyvaThemeResetInfo $hyvaThemeResetInfo,
         ResourceConnection $resourceConnection,
@@ -66,7 +75,8 @@ class MigrateThemeToGeneratedBaseLayout
         DirectoryWriteFactory $directoryWriteFactory,
         ModuleDir $moduleDir,
         MutateXml $mutateXml,
-        HyvaThemes $hyvaThemes
+        HyvaThemes $hyvaThemes,
+        ?Filesystem $filesystem = null,
     ) {
         $this->hyvaThemeResetInfo = $hyvaThemeResetInfo;
         $this->resourceConnection = $resourceConnection;
@@ -75,6 +85,7 @@ class MigrateThemeToGeneratedBaseLayout
         $this->moduleDir = $moduleDir;
         $this->mutateXml = $mutateXml;
         $this->hyvaThemes = $hyvaThemes;
+        $this->filesystem = $filesystem ?? ObjectManager::getInstance()->get(Filesystem::class);
     }
 
     public function process(string $code): void
@@ -120,7 +131,7 @@ class MigrateThemeToGeneratedBaseLayout
     private function loadThemeXml(string $themeXmlFile): \SimpleXMLElement
     {
         if (!file_exists($themeXmlFile)) {
-            throw new \RuntimeException(sprintf('No theme.xml file found in "%s".', dirname($themeXmlFile)));
+            throw new \RuntimeException(sprintf('No theme.xml file found in "%s".', $this->filesystem->getParentDirectory($themeXmlFile)));
         }
         return $this->loadXml($themeXmlFile, 'theme.xml');
     }

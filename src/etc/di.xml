@@ -24,6 +24,7 @@
                 <item name="CatalogProductViewBaseLayoutReset" xsi:type="object">Hyva\BaseLayoutReset\Model\Layout\SpecialCaseLayoutFileReset\CatalogProductViewBaseLayoutReset</item>
                 <item name="DownloadableCustomerProductsBaseLayoutReset" xsi:type="object">Hyva\BaseLayoutReset\Model\Layout\SpecialCaseLayoutFileReset\DownloadableCustomerProductsBaseLayoutReset</item>
                 <item name="InventoryInStorePickupCheckoutSuccessBaseLayoutReset" xsi:type="object">Hyva\BaseLayoutReset\Model\Layout\SpecialCaseLayoutFileReset\InventoryInStorePickupCheckoutSuccessBaseLayoutReset</item>
+                <item name="LiveSearchProductListingBaseLayoutReset" xsi:type="object">Hyva\BaseLayoutReset\Model\Layout\SpecialCaseLayoutFileReset\LiveSearchProductListingBaseLayoutReset</item>
                 <item name="NegotiableQuotePrintBaseLayoutReset" xsi:type="object">Hyva\BaseLayoutReset\Model\Layout\SpecialCaseLayoutFileReset\NegotiableQuotePrintBaseLayoutReset</item>
                 <item name="NegotiableQuoteTemplateViewBaseLayoutReset" xsi:type="object">Hyva\BaseLayoutReset\Model\Layout\SpecialCaseLayoutFileReset\NegotiableQuotePrintBaseLayoutReset</item>
                 <item name="SwaggerIndexBaseLayoutReset" xsi:type="object">Hyva\BaseLayoutReset\Model\Layout\SpecialCaseLayoutFileReset\SwaggerIndexBaseLayoutReset</item>
